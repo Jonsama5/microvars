@@ -1,9 +1,15 @@
 Package: microvars
-Title: What the Package Does (One Line, Title Case)
+Title: Tools for Exploratory Microbiome Analysis by Metadata Variables
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: microvars simplifies the exploratory analysis of microbiome data by 
+  leveraging metadata variables. Built on top of the phyloseq framework, it 
+    offers user-friendly functions for performing statistical tests and generating 
+    customizable visualizations. This package is designed to accelerate the 
+    initial exploration and interpretation of microbiome datasets, making it 
+    easier to uncover patterns and associations linked to sample metadata such 
+    as sex, location, or treatment.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
