@@ -38,7 +38,6 @@ plotwatcher <- function(plotlist) {
       }
     } else if (option == "2") {
       cat("Visualizing all plots together\n")
-      library(patchwork)
       combined <- patchwork::wrap_plots(lapply(plotlist, function(p) p + theme(legend.position = "none")))
       print(combined)
 
