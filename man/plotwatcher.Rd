@@ -15,3 +15,6 @@ Displays plots interactively. Does not return a value.
 \description{
 Allows the user to browse a list of ggplot2 plots either one by one, or all together using patchwork.
 }
+\examples{
+plotwatcher(plotlist)
+}

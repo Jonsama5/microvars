@@ -10,7 +10,7 @@
 #' @importFrom ggplot2 theme
 #' @importFrom patchwork wrap_plots
 #'
-#' @examples
+#' @examples plotwatcher(plotlist)
 plotwatcher <- function(plotlist) {
   cat("Welcome to plotwatcher, choose between following:")
   option <- readline(prompt = "Select an option: \n(1) Visualize plot by plot\n(2) Visualize plots together\n(3) Exit\n")
