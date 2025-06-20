@@ -2,7 +2,7 @@ Package: microvars
 Title: Tools for Exploratory Microbiome Analysis by Metadata Variables
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Jon", "Corral", , "corrallopezjon@gmail.com", role = c("aut"))
 Description: microvars simplifies the exploratory analysis of microbiome data by 
   leveraging metadata variables. Built on top of the phyloseq framework, it 
     offers user-friendly functions for performing statistical tests and generating 
