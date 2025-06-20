@@ -17,9 +17,7 @@
 #'
 #' @examples plot_bar_by_tax(phy)
 plot_bar_by_tax <- function(physeq, palette = NULL) {
-
   plot_bar_list <- list()
-
   # Iterate over every tax rank
   for (rank in rank_names(physeq)) {
     taxa <- get_taxa_unique(physeq, rank)
