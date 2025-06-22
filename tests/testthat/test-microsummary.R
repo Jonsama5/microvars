@@ -1,23 +1,23 @@
 test_that("microsummary returns correct structure", {
-  # Cargar un objeto de ejemplo
+  # Load example data
   data("GlobalPatterns", package = "phyloseq")
   phy <- GlobalPatterns
 
   result <- microsummary(phy)
 
-  # Es un tibble
+  # Verify it is a tibble
   expect_s3_class(result, "tbl_df")
 
-  # Tiene las columnas esperadas
+  # Expected columns
   expect_named(result, c(
     "TotalReads", "NumOTUs", "MeanReads", "MedianReads", "SDReads",
     "MinReads", "MaxReads", "ShannonDiversity", "SimpsonDiversity",
     "BrayDiversity", "JaccardDiversity"
   ))
 
-  # Los valores devueltos son numéricos
+  # Returned values are numeric
   expect_true(all(purrr::map_lgl(result, is.numeric)))
 
-  # Solo una fila (resumen general)
+  # Expect a singular row
   expect_equal(nrow(result), 1)
 })
