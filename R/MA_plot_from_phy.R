@@ -10,19 +10,6 @@
 #' @return A ggplot object showing differentially abundant taxa. If \code{return_data = TRUE}, a list with the plot, data, and significant taxa.
 #' @export
 #'
-#' @examples MA_plot_from_phy(physeq, condition_var = "group", tax_level = "Genus")
-#' Create a differential abundance plot using the DESeq2 package from a phyloseq object
-#'
-#' @param physeq A \code{phyloseq} object containing count data, sample metadata, and taxonomy
-#' @param condition_var A \code{string} indicating the name of a variable in the sample metadata to compare groups
-#' @param tax_level A \code{string} indicating the taxonomic level at which to label the taxa (e.g. "Genus", "Family")
-#' @param title A \code{string} to customize the plot title (optional)
-#' @param alpha A \code{numeric} value indicating the adjusted p-value threshold for significance (default = 0.05)
-#' @param return_data Logical; if \code{TRUE}, returns a \code{list} with the plot, full data, and significant taxa
-#'
-#' @return A ggplot object showing differentially abundant taxa. If \code{return_data = TRUE}, a list with the plot, data, and significant taxa.
-#' @export
-#'
 #' @examples
 #' MA_plot_from_phy(physeq, condition_var = "group", tax_level = "Genus")
 MA_plot_from_phy <- function(physeq, condition_var, tax_level = "Genus", title = NULL, alpha = 0.05, return_data = FALSE) {
