@@ -2,6 +2,7 @@
 
 export(MA_plot_from_phy)
 export(create_phyloseq)
+export(get_top_taxa)
 export(microsummary)
 export(plot_bar_by_tax)
 export(plot_bar_by_vars)
