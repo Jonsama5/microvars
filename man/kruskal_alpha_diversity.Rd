@@ -24,6 +24,6 @@ performs Kruskal-Wallis tests to compare diversity across groups.
 \examples{
 library(phyloseq)
 data(GlobalPatterns)
-resultados <- kruskal_alpha_diversity(GlobalPatterns, "SampleType")
-print(resultados)
+resuls <- kruskal_alpha_diversity(GlobalPatterns, "SampleType")
+print(results)
 }

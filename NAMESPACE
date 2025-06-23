@@ -2,6 +2,7 @@
 
 export(MA_plot_from_phy)
 export(create_phyloseq)
+export(dunn_post_hoc_phy)
 export(get_top_taxa)
 export(kruskal_alpha_diversity)
 export(microsummary)
