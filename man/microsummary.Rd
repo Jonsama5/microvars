@@ -2,19 +2,34 @@
 % Please edit documentation in R/microsummary.R
 \name{microsummary}
 \alias{microsummary}
-\title{Obtain data about the phyloseq dataset}
+\title{Obtain data about the phyloseq dataset and plot sequencing depth}
 \usage{
-microsummary(x)
+microsummary(
+  x,
+  alpha_measures = c("Shannon", "Simpson"),
+  beta_measures = c("bray", "jaccard")
+)
 }
 \arguments{
-\item{x}{A phyloseq class Object.}
+\item{x}{A phyloseq-class object.}
+
+\item{alpha_measures}{Character vector of alpha diversity indices to compute.}
+
+\item{beta_measures}{Character vector of beta diversity distance metrics to compute.}
 }
 \value{
-A tibble containing the total number of reads, OTUs, descriptive statistics of reads, alpha and beta diversity indexes.
+A list with:
+\itemize{
+\item \code{summary}: A tibble with sequencing and diversity statistics.
+\item \code{plot}: A ggplot2 object showing the distribution of reads per sample.
+}
 }
 \description{
-Obtain data about the phyloseq dataset
+Obtain data about the phyloseq dataset and plot sequencing depth
 }
 \examples{
-microsummary(phy)
+data(GlobalPatterns)
+res <- microsummary(GlobalPatterns)
+res$summary
+res$plot
 }

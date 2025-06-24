@@ -21,6 +21,6 @@ in the sample_data of a phyloseq object.
 }
 \examples{
 data(GlobalPatterns)
-plots <- plot_richness_by_variables(GlobalPatterns, measures = c("Shannon", "Simpson"))
+plots <- plot_beta_diversity_by_vars(GlobalPatterns, measures = c("Shannon", "Simpson"))
 print(plots[["SampleType"]])
 }

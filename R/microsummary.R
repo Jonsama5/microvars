@@ -1,46 +1,81 @@
-#' Obtain data about the phyloseq dataset
+#' Obtain data about the phyloseq dataset and plot sequencing depth
 #'
-#' @param x A phyloseq class Object.
+#' @param x A phyloseq-class object.
+#' @param alpha_measures Character vector of alpha diversity indices to compute.
+#' @param beta_measures Character vector of beta diversity distance metrics to compute.
 #'
-#' @return A tibble containing the total number of reads, OTUs, descriptive statistics of reads, alpha and beta diversity indexes.
+#' @return A list with:
+#' \itemize{
+#'   \item \code{summary}: A tibble with sequencing and diversity statistics.
+#'   \item \code{plot}: A ggplot2 object showing the distribution of reads per sample.
+#' }
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom phyloseq sample_sums otu_table estimate_richness distance
-#'
+#' @importFrom ggplot2 ggplot aes geom_histogram labs theme_minimal
 #' @examples
-#' microsummary(phy)
-microsummary <- function(x) {
-  # Total read number across all samples
-  total_reads <- sum(phyloseq::sample_sums(x))
+#' data(GlobalPatterns)
+#' res <- microsummary(GlobalPatterns)
+#' res$summary
+#' res$plot
+microsummary <- function(x,
+                         alpha_measures = c("Shannon", "Simpson"),
+                         beta_measures = c("bray", "jaccard")) {
+  if (!inherits(x, "phyloseq")) {
+    stop("Input must be a phyloseq object.")
+  }
 
-  # Number of detected OTUs across all samples.
+  sample_reads <- phyloseq::sample_sums(x)
+
+  total_reads <- sum(sample_reads)
   n_otu <- nrow(phyloseq::otu_table(x))
 
-  # Descriptive statistics
-  mean_reads <- mean(phyloseq::sample_sums(x))
-  median_reads <- median(phyloseq::sample_sums(x))
-  devs <- sd(phyloseq::sample_sums(x))
-  min_reads <- min(phyloseq::sample_sums(x))
-  max_reads <- max(phyloseq::sample_sums(x))
+  mean_reads <- mean(sample_reads)
+  median_reads <- median(sample_reads)
+  sd_reads <- sd(sample_reads)
+  min_reads <- min(sample_reads)
+  max_reads <- max(sample_reads)
 
-  # Diversity indexes
-  diversity <- phyloseq::estimate_richness(x, measures = c("Shannon", "Simpson"))
-  beta_b <- phyloseq::distance(x, method = "bray", weighted = TRUE)
-  beta_j <- phyloseq::distance(x, method = "jaccard", weighted = TRUE)
+  diversity <- phyloseq::estimate_richness(x, measures = alpha_measures)
 
-  # Tibble creation
+  alpha_summary <- lapply(alpha_measures, function(measure) {
+    mean(diversity[[measure]], na.rm = TRUE)
+  })
+  names(alpha_summary) <- paste0("Mean_", alpha_measures)
+
+  beta_summary <- lapply(beta_measures, function(method) {
+    d <- try(phyloseq::distance(x, method = method, weighted = TRUE), silent = TRUE)
+    if (inherits(d, "try-error")) NA else mean(d)
+  })
+  names(beta_summary) <- paste0("Mean_", beta_measures, "_distance")
+
   stats_tibble <- tibble::tibble(
     TotalReads = total_reads,
     NumOTUs = n_otu,
     MeanReads = mean_reads,
     MedianReads = median_reads,
-    SDReads = devs,
+    SDReads = sd_reads,
     MinReads = min_reads,
     MaxReads = max_reads,
-    ShannonDiversity = mean(diversity$Shannon),
-    SimpsonDiversity = mean(diversity$Simpson),
-    BrayDiversity = mean(beta_b),
-    JaccardDiversity = mean(beta_j)
+    !!!alpha_summary,
+    !!!beta_summary
   )
-  return(stats_tibble)
+
+  # --- Visualization: histogram of reads per sample ---
+  reads_df <- tibble::tibble(Sample = names(sample_reads),
+                             Reads = as.numeric(sample_reads))
+
+  read_plot <- ggplot2::ggplot(reads_df, ggplot2::aes(x = Reads)) +
+    ggplot2::geom_histogram(bins = 30, fill = "#2C3E50", color = "white") +
+    ggplot2::labs(title = "Distribution of sequencing depth per sample",
+                  x = "Reads per sample",
+                  y = "Number of samples") +
+    ggplot2::theme_minimal()
+
+  return(list(
+    summary = stats_tibble,
+    plot = read_plot
+  ))
 }
+
+

@@ -28,15 +28,10 @@ MA_plot_from_phy(
 }
 \value{
 A ggplot object showing differentially abundant taxa. If \code{return_data = TRUE}, a list with the plot, data, and significant taxa.
-
-A ggplot object showing differentially abundant taxa. If \code{return_data = TRUE}, a list with the plot, data, and significant taxa.
 }
 \description{
 Create a differential abundance plot using the DESeq2 package from a phyloseq object
 }
 \examples{
-MA_plot_from_phy(physeq, condition_var = "group", tax_level = "Genus")
-Create a differential abundance plot using the DESeq2 package from a phyloseq object
-
 MA_plot_from_phy(physeq, condition_var = "group", tax_level = "Genus")
 }
