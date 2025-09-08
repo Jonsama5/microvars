@@ -1,7 +1,0 @@
-"SampleID","Host_Sex","Condition","Treatment","Location"
-"Sample1","Female","Control","None","North"
-"Sample2","Male","Control","None","Central"
-"Sample3","Female","Treated","Antibiotic","South"
-"Sample4","Male","Treated","Insecticide","West"
-"Sample5","Female","Control","None","East"
-"Sample6","Male","Treated","Antibiotic","Southwest"
