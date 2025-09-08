@@ -6,7 +6,7 @@ microbiome data. Below you can find how to install the package and learn how to 
 ## Instalation
 
 devtools::install_github("Jonsama5/microvars")
-library(tuPaquete)
+library(microvars)
 
 ## How to use microvars
 
